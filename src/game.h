@@ -12,4 +12,3 @@ extern "C" {
    bool TryMove(Entity* mover, LevelData* level,  CommandBuffer* cmd_buffer, int xDir, int yDir, int strength);
    void ChangeScene(GameData* data, SCENE_TYPES new_scene);
 }
-

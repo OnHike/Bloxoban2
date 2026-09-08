@@ -9,7 +9,7 @@
 constexpr size_t GAME_MEMORY_ALLOWANCE = MEGABYTES(14);
 constexpr size_t AUDIO_MEMORY_ALLOWANCE = MEGABYTES(5);
 constexpr int FPS = 240;
-const double FRAME_TIME_MS = 1000.0 / FPS;
+constexpr double FRAME_TIME_MS = 1000.0 / FPS;
 
 const float UNDO_REPEAT_TIME = 0.15;
 const float MOVE_SPEED = 6.0;
@@ -19,11 +19,11 @@ const int UPSCALE_FACTOR = 4;
 const int TILE_SIZE_PX_RAW = 16;
 const int TILE_SIZE_PX_SCALED = TILE_SIZE_PX_RAW * UPSCALE_FACTOR;
 
-inline void Expand1DTo2D(int flatIndex, int width, int* x, int* y){
+inline void Convert1DTo2D(int flatIndex, int width, int* x, int* y){
     *x = flatIndex % width;
     *y = flatIndex / width;
 }
-inline void Expand1DTo2D(int flatIndex, int width, float* x, float* y){
+inline void Convert1DTo2D(int flatIndex, int width, float* x, float* y){
     *x = (float)(flatIndex % width);
     *y = (float)(flatIndex / width);
 }
@@ -32,3 +32,4 @@ static const char STOP_CHAR = '\0';
 inline bool IsStringEmpty(const char* str){
     return str == nullptr || str[0] == STOP_CHAR;
 }
+

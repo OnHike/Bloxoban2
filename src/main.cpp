@@ -5,11 +5,11 @@
 #include <fileapi.h>
 #include <cstdio>
 #include <fstream>
-
 #include "SDL3/SDL_init.h"
 #include "SDL3/SDL_keyboard.h"
 #include "SDL3/SDL_mouse.h"
 #include "SDL3/SDL_render.h"
+#include "SDL3/SDL_scancode.h"
 #include "SDL3/SDL_stdinc.h"
 #include "SDL3/SDL_timer.h"
 #include "SDL3/SDL_log.h"
@@ -23,11 +23,14 @@
 #include "input.h"
 #include "spriteLibrary.h"
 
+using namespace Memory;
+
+
 SDL_Window* window;
 SDL_Renderer* renderer;
 
-Uint64 NOW;
-Uint64 PREV;
+Uint64 NOW = 0;
+Uint64 PREV = 0;
 
 constexpr const char* NAME_OF_DLL = "hellofatime_game.dll";
 constexpr const char* NAME_OF_TEMP_DLL = "hellofatime_temp.dll";
@@ -146,12 +149,12 @@ void CalculateRemainingFrameTime_MS(double* milliseconds){
 
 void StoreGameState(Memory::Arena* arena){
     std::ofstream file("temp_state.bin", std::ios::binary);
-    file.write(reinterpret_cast<const char*>(arena->base), arena->size);
+    file.write(reinterpret_cast<const char*>(arena->start), arena->size);
 }
 
 void RetrieveGameState(Memory::Arena* arena){
     std::ifstream file("temp_state.bin", std::ios::binary);
-    file.read(reinterpret_cast<char*>(arena->base), arena->size);
+    file.read(reinterpret_cast<char*>(arena->start), arena->size);
 }
 
 int main() {
@@ -163,7 +166,9 @@ int main() {
     SDL_Setup();    
 
     Memory::Arena* arena_main = new Memory::Arena();    
+
     Memory::Initialize(arena_main, game_memory, GAME_MEMORY_ALLOWANCE);
+
     GameData* gameData = ALLOC(arena_main, GameData);
     gameData->arena_main = arena_main;
     gameData->ticks_total = ALLOC(arena_main, uint64_t);
@@ -231,10 +236,7 @@ int main() {
 
         CalculateDeltaTime(&dt,  dt_scaler);
         
-        if(++dll_check_counter > 100){
-            dll_check_counter = 0;
-            DLL_CheckStatus(&dll);        
-        }
+        DLL_CheckStatus(&dll);        
 
         Reset(gameData->arena_scratch);
         
@@ -257,6 +259,12 @@ int main() {
         }
 
         gameData->input.keys_current = SDL_GetKeyboardState(nullptr);
+
+        loop(monkey, 5){
+            
+        }
+
+        
         float* delta_x = &gameData->input.mouse_x_delta;
         float* delta_y = &gameData->input.mouse_y_delta;
         *delta_x = gameData->input.mouse_x; // store last frames value

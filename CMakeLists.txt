@@ -32,8 +32,8 @@ set(SHARED_SOURCES
 )
 
 # Create the file references
-file(GLOB_RECURSE LIB_FILES "${CMAKE_SOURCE_DIR}/lib/*.lib")
-file(GLOB_RECURSE DLL_FILES "${CMAKE_SOURCE_DIR}/lib/*.dll")
+file(GLOB_RECURSE LIB_FILES "lib/*.lib")
+file(GLOB_RECURSE DLL_FILES "lib/*.dll")
 file(GLOB_RECURSE DLL_EXCLUSIVE CONFIGURE_DEPENDS "src/*.cpp")
 list(REMOVE_ITEM DLL_EXCLUSIVE
     ${EXE_EXCLUSIVE}

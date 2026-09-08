@@ -18,7 +18,8 @@ void DEV::Initialize(SDL_Window* window, SDL_Renderer* renderer){
   ImGui_ImplSDL3_InitForSDLRenderer(window, renderer);
   ImGui_ImplSDLRenderer3_Init(renderer);
   ImGuiStyle* style = &ImGui::GetStyle();
-  style->ScaleAllSizes(2.0);
+  // style->ScaleAllSizes(5.0);
+  style->FontSizeBase = 18;
   ImGuiIO& io = ImGui::GetIO();
   int w, h;
   SDL_GetWindowSize(window, &w, &h);

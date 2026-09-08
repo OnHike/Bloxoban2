@@ -56,7 +56,7 @@ void CreateLevel(Arena* arena, LevelData* level, Tileset* tileset, const char* l
       if(local_id != 0){
         int x;
         int y;
-        Expand1DTo2D(i, level->w, &x, &y);
+        Convert1DTo2D(i, level->w, &x, &y);
         level->goals[index].x = x; 
         level->goals[index].y = y; 
         index++;
@@ -87,7 +87,7 @@ void CreateEntities(LevelData* lvl_data, Arena* arena){
     uint16_t entity_id = GetLocalTileID(entities[i], result);
     int x;
     int y;
-    Expand1DTo2D(i, lvl_data->w, &x, &y);
+    Convert1DTo2D(i, lvl_data->w, &x, &y);
     AddEntity((ENTITY_ID)entity_id, x, y, lvl_data);
   }    
 }

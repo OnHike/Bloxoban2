@@ -21,7 +21,7 @@ void RenderSprite_World(SpriteRenderInfo spriteRenderInfo, SDL_Renderer* rendere
     int height = sprite->height / sprite->sprite_count_y;
     tilesetRect.w = width;
     tilesetRect.h = height;
-    Expand1DTo2D(frame, sprite->sprite_count_x, &tilesetRect.x, &tilesetRect.y);
+    Convert1DTo2D(frame, sprite->sprite_count_x, &tilesetRect.x, &tilesetRect.y);
     tilesetRect.x *= width;
     tilesetRect.y *= height;
   }
@@ -44,6 +44,7 @@ void RenderSprite_World(SpriteRenderInfo spriteRenderInfo, SDL_Renderer* rendere
   rect.x -= camera->camera_x;
   rect.y -= camera->camera_y;
   }
+
   
   SDL_SetTextureScaleMode(sprite->texture, SDL_SCALEMODE_PIXELART);
   SDL_SetTextureAlphaModFloat(sprite->texture, alpha);

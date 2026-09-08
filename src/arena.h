@@ -6,7 +6,7 @@
 namespace Memory {
     
   struct Arena {
-      unsigned char* base;
+      unsigned char* start;
       size_t size;
       size_t used;  
   };

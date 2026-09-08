@@ -1,9 +1,9 @@
 #pragma once
-#include "arena.h"
-#include "entity.h"
-#include "tilesetLibrary.h"
 #include <cstdint>
 #include "Parsers/json.hpp"
+#include "tilesetLibrary.h"
+#include "entity.h"
+#include "arena.h"
 using namespace Memory;
 
 struct Goal{

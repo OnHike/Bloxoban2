@@ -81,6 +81,9 @@ void PlaySong(SONG_ID id){
   case SONG_ID::NONE:
     break;
   }
+
+
+
   FMOD_System_CreateStream(system, song_name, FMOD_LOOP_NORMAL, nullptr, &g_audioSystem->song);
   int INFINITE = -1;
   FMOD_Sound_SetLoopCount(g_audioSystem->song, INFINITE);

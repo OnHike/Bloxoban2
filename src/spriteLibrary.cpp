@@ -45,6 +45,7 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
     if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
     return GetSprite(SPRITE_ID::Rock, spritebuffer);
   }
+
   
   if(entity->id == ENTITY_ID::MEDUSA && entity->action == Actions::ROTATING){
     Sprite* spritesheet = GetSprite(SPRITE_ID::Medusa_Rotate, spritebuffer);
