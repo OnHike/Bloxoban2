@@ -37,20 +37,20 @@ switch (entity->id) {
     SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
     entity->strength = 1;
     break;
-  case ENTITY_ID::GOLEM:
+  /*case ENTITY_ID::GOLEM:
     SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
     AddBehaviour(entity, Behaviour::UNPUSHABLE);
     entity->strength = 999;
-    break;
+    break;*/
   case ENTITY_ID::MEDUSA:
     SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
     AddBehaviour(entity, Behaviour::JUMPS);
     entity->strength = 1;
     break;  
-  case ENTITY_ID::SIREN:
+  /*case ENTITY_ID::SIREN:
     SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
     entity->strength = 0;
-    break;  
+    break;  */
   case ENTITY_ID::ROCK:
     SetBehaviour(entity, (Behaviour)CAN_MOVE);
     break;
@@ -70,6 +70,8 @@ entity->behaviour = (Behaviour)(entity->behaviour & ~flags);
 }
 
 void PostMove(Entity *entity, LevelData* level, CommandBuffer* commandBuffer){
+
+    /*
     for (int i = 0; i < level->entityCount; i++) {
         Entity* medusa = &level->entityBuffer[i];
         if(medusa->id == ENTITY_ID::MEDUSA){
@@ -81,26 +83,31 @@ void PostMove(Entity *entity, LevelData* level, CommandBuffer* commandBuffer){
                 }
             }   
         }
-    }
+    }*/
 }
 void PostRotation(Entity* entity, LevelData* level, CommandBuffer* commandBuffer, Direction from, Direction to){
     if(from == to){
         return;
     }
+
+    /*                                     //This is Just the code that petrefies things the medusa looks att
     if(entity->id == ENTITY_ID::MEDUSA){
         Entity* entity_looked_at = RaycastFirstEntity(entity->x, entity->y, to, level);
         if(entity_looked_at != nullptr){
             if(!HasBehaviour(entity_looked_at, Behaviour::IS_PETRIFIED)){
                 ModifyBehaviourCommand modify(entity_looked_at, Behaviour::IS_PETRIFIED, ModifyBehaviourCommand::ADD);
                 Push(commandBuffer, modify, level);
-             }
+            }
         }
-    }
+    }*/
 }
 void PreRotation(Entity* entity, LevelData* level,CommandBuffer* commandBuffer, Direction from, Direction to){
     if(from == to){
         return;
     }
+
+
+    /*                                      //This is Just the code that UN-petrefies things the medusa looks att
     if(entity->id == ENTITY_ID::MEDUSA){
         Entity* entity_previously_looked_at = RaycastFirstEntity(entity->x, entity->y, from, level);
         if(entity_previously_looked_at != nullptr){
@@ -109,6 +116,6 @@ void PreRotation(Entity* entity, LevelData* level,CommandBuffer* commandBuffer, 
                 Push(commandBuffer, modify, level);
             }
         }   
-    }
+    }*/
 }
 

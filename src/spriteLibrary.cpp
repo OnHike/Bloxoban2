@@ -41,10 +41,11 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Button_Basic, "assets/sprites/basic_button.png",0,0,3,3},
   };
 
-SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer, const uint64_t* ticks_total){
+SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer, const uint64_t* ticks_total)
+  {/*
     if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
     return GetSprite(SPRITE_ID::Rock, spritebuffer);
-  }
+  }*/
 
   
   if(entity->id == ENTITY_ID::MEDUSA && entity->action == Actions::ROTATING){
@@ -143,13 +144,13 @@ Sprite* GetSpriteFromID(ENTITY_ID id, Sprite* spriteBuffer){
    break;
  case ENTITY_ID::MEDUSA:
    sprite_to_return = nullptr;
-   break;
+   break;/*
  case ENTITY_ID::SIREN:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Siren];
    break;
  case ENTITY_ID::GOLEM:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Golem];
-   break;
+   break;*/
   }
 
   if(sprite_to_return == nullptr || sprite_to_return->texture == nullptr){

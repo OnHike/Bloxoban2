@@ -250,9 +250,9 @@ extern "C" {
       return;
     }
     
-    if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
+    /*if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
       return;
-    }
+    }*/
     int xDir = gameplay->input_buffer[gameplay->input_buffer_read_count % gameplay->input_buffer_capacity].x;
     int yDir = gameplay->input_buffer[gameplay->input_buffer_read_count % gameplay->input_buffer_capacity].y;
 

@@ -61,9 +61,11 @@ void RenderEntities(GameData* data, SDL_Renderer* renderer){
       continue;
     }
     SpriteRenderInfo sprite = GetSprite_FromEntityState(entity, data->spriteBuffer, data->ticks_total);
-    if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
+
+    /*if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
       sprite = GetSprite(SPRITE_ID::Rock, data->spriteBuffer);
-    }
+    }*/
+
     float x_animated = std::lerp(entity->x_prev, entity->x, entity->progress_01);
     float y_animated = std::lerp(entity->y_prev, entity->y, entity->progress_01);
     float ground_y = y_animated;
