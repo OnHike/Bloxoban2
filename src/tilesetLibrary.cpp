@@ -8,7 +8,7 @@ using namespace nlohmann;
 using namespace std;
 
 static const TilesetDataEntry all_tilesets_data[]{
-  {TILESETS::Dungeon, "assets/tilesets/dungeon_tileset.tsj"}
+  {TILESETS::Dungeon, "assets/tilesets/SpriteSheet_WallsAndFloor.tsj"}
 };
 
 
