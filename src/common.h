@@ -15,8 +15,8 @@ const float UNDO_REPEAT_TIME = 0.15;
 const float MOVE_SPEED = 6.0;
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
-const int UPSCALE_FACTOR = 4;
-const int TILE_SIZE_PX_RAW = 16;
+const int UPSCALE_FACTOR = 2;
+const int TILE_SIZE_PX_RAW = 32;
 const int TILE_SIZE_PX_SCALED = TILE_SIZE_PX_RAW * UPSCALE_FACTOR;
 
 inline void Convert1DTo2D(int flatIndex, int width, int* x, int* y){

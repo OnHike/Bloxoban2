@@ -404,7 +404,7 @@ extern "C" {
   void DrawScene(GameData* data, SCENE_TYPES scene, SDL_Renderer* renderer){
     switch(scene){
         case SCENE_TYPES::TITLESCREEN:
-        RenderSprite_World(data->scenes.titlescreen.background, renderer, &data->camera, 0, 0);
+        RenderSprite_World(data->scenes.titlescreen.background, renderer, &data->camera, 0, 0, 2);
         break;
       case SCENE_TYPES::MAINMENU:
         DrawMenu(&data->scenes.mainMenu, renderer, data->spriteBuffer, &data->input);
