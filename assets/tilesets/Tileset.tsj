@@ -16,169 +16,337 @@
          "id":3,
          "image":"..\/sprites\/Freak.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":6,
          "image":"..\/sprites\/wall.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":7,
          "image":"..\/sprites\/wallAbove.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":27,
          "image":"..\/sprites\/WallTIle_WallSidel.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":28,
          "image":"..\/sprites\/WallTile_WallsideLeft.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":8,
          "image":"..\/sprites\/FloorTile1_SafeCornLOWL.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":9,
          "image":"..\/sprites\/FloorTile1_SafeSTRDOW.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":10,
          "image":"..\/sprites\/FloorTile1_SafeCornLOWR.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":11,
          "image":"..\/sprites\/FloorTile1_SafeSTRLEFT.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":4,
          "image":"..\/sprites\/ground.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":12,
          "image":"..\/sprites\/FloorTile1_SafeSTRRIGHT.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":16,
          "image":"..\/sprites\/FloorTile1_SafeCornUPL.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":14,
          "image":"..\/sprites\/FloorTile1_SafeSTRUP.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":15,
          "image":"..\/sprites\/FloorTile1_SafeCornUPR.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":17,
          "image":"..\/sprites\/FloorTile2_SafeCornLOWL.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":18,
          "image":"..\/sprites\/FloorTile2_SafeSTRDOW.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":19,
          "image":"..\/sprites\/FloorTile2_SafeCornLOWR.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":20,
          "image":"..\/sprites\/FloorTile2_SafeSTRLEFT.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":5,
          "image":"..\/sprites\/ground2.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":21,
          "image":"..\/sprites\/FloorTile2_SafeSTRRIGHT.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":29,
          "image":"..\/sprites\/FloorTile2_SafeCornUPL.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":30,
          "image":"..\/sprites\/FloorTile2_SafeSTRUP.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":31,
          "image":"..\/sprites\/FloorTile2_SafeCornUPR.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":22,
          "image":"..\/sprites\/WallDeco_ExitSign.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":23,
          "image":"..\/sprites\/WallDeco_Poster1.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":26,
          "image":"..\/sprites\/WallDeco_Poster2.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":24,
          "image":"..\/sprites\/WallDeco_Poster3.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":25,
          "image":"..\/sprites\/WallDeco_WARNING.png",
          "imageheight":32,
-         "imagewidth":32
+         "imagewidth":32,
+         "properties":[
+                {
+                 "name":"walkable",
+                 "type":"bool",
+                 "value":true
+                }]
         }],
  "tilewidth":32,
  "type":"tileset",

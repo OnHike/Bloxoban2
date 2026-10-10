@@ -64,6 +64,10 @@
         {
          "firstgid":1,
          "source":"..\/..\/..\/..\/..\/Users\/teoma\/tilledProject\/Tileset.tsx"
+        }, 
+        {
+         "firstgid":33,
+         "source":"..\/tilesets\/Entities.tsj"
         }],
  "tilewidth":32,
  "type":"map",
