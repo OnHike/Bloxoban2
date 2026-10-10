@@ -16,17 +16,11 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Demon, "assets/sprites/player.png"},
   {SPRITE_ID::Rock, "assets/sprites/rock.png", 10, 18},
   {SPRITE_ID::Medusa_Rotate, "assets/sprites/medusa_rotate.png", 12, 24, 8, 1},
-{
-  .id = SPRITE_ID::Medusa_Idle_Left,
-  .path = "assets/sprites/medusa_idle_left.png",
-  .pivot_x = 12,
-  .pivot_y = 24,
-  .tileset_cell_count_x = 4,
-  .tileset_cell_count_y = 1,
-  .framerate = 8
-},
+  {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/medusa_idle_left.png", 12, 24, 4, 1, 8},
   {SPRITE_ID::Medusa_Idle_Front, "assets/sprites/medusa_idle_front.png", 12, 24, 4, 1, 8},
   {SPRITE_ID::Medusa_Idle_Back, "assets/sprites/medusa_idle_back.png", 12, 24, 4, 1, 8},
+  // TODO: Add Cutscene data here
+  {SPRITE_ID::SmokeCutscene, "assets/sprites/SmokeCutscene.png", 0, 0, 2, 1, 1},
   {SPRITE_ID::Dropshadow, "assets/sprites/dropshadow.png", 8, 8},
   {SPRITE_ID::black_1x1, "assets/sprites/1x1_black.png",0,0},
   {SPRITE_ID::titlescreen_background, "assets/sprites/titlescreen.png"},
@@ -42,15 +36,10 @@ static const SpriteDataEntry all_sprite_data[] = {
   };
 
 SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer, const uint64_t* ticks_total)
-  {/*
-    if(HasBehaviour(entity, Behaviour::IS_PETRIFIED)){
-    return GetSprite(SPRITE_ID::Rock, spritebuffer);
-  }*/
-
-  
+  {
   if(entity->id == ENTITY_ID::MEDUSA && entity->action == Actions::ROTATING){
     Sprite* spritesheet = GetSprite(SPRITE_ID::Medusa_Rotate, spritebuffer);
-     
+    
     int start = 0;
     int end = 0;
     switch(entity->facing_previous){
@@ -159,8 +148,6 @@ Sprite* GetSpriteFromID(ENTITY_ID id, Sprite* spriteBuffer){
 
   return sprite_to_return;
 }
-
-
 
 namespace AssetManagement{
   void LoadAllSprites(Sprite* spriteBuffer, SDL_Renderer *renderer){

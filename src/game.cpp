@@ -28,6 +28,7 @@ extern "C" {
   void InitializeGame(Gameplay* gameplay, Arena* arena_levels, Tileset* tilesetBuffer){
     assert(gameplay->initialized == false);
     gameplay->currentLevelIndex = 0;
+    gameplay->pending_next_level = false;
     CreateLevel(arena_levels, &gameplay->levels[0], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_01.tmj");
     CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_02.tmj");
     gameplay->initialized = true;
@@ -102,7 +103,16 @@ extern "C" {
   void UpdateTitlescreen(TitleScreen* titlescreen, const float dt){
   }
 
-  void UpdateGame(Gameplay* gameplay, Input* input, Arena* arena_scratch, Arena* arena_commands, Arena* arena_entities, const float dt){
+  // Seconds each frame of the smoke cutscene is shown; tune these to match the audio.
+  static const float SMOKE_CUTSCENE_FRAME_DURATIONS[] = { 1.5f, 3.5f };
+
+  void PlaySmokeCutscene(GameData* data){
+    PlaySFX(SFX_ID::SMOKE);
+    StartCutscene(&data->scenes.cutscene, GetSprite(SPRITE_ID::SmokeCutscene, data->spriteBuffer),
+      SMOKE_CUTSCENE_FRAME_DURATIONS, (int)(sizeof(SMOKE_CUTSCENE_FRAME_DURATIONS) / sizeof(float)));
+  }
+
+  void UpdateGame(Gameplay* gameplay, Input* input, Arena* arena_scratch, Arena* arena_commands, Arena* arena_entities, const float dt, GameData* data){
 
     if(KeyPressed(input, SDL_SCANCODE_R)){ // restart level on `R`
       StartLevel(gameplay, arena_commands, arena_entities);
@@ -123,7 +133,7 @@ extern "C" {
         Undo(gameplay->commandBuffer, GetCurrentLevel(gameplay));
       }
     }
-   
+
     if(KeyPressed(input,SDL_SCANCODE_RIGHT) || KeyHeld_ForTime(input,SDL_SCANCODE_RIGHT, (1 / MOVE_SPEED) * 1.15)){
       ResetKeyHeldTime(input, SDL_SCANCODE_RIGHT);
       gameplay->input_buffer[gameplay->input_buffer_write_count++ % gameplay->input_buffer_capacity] = {1, 0};
@@ -156,6 +166,9 @@ extern "C" {
     for (int i = 0; i < level->goalCount; i++) {
       Entity* entity = GetEntity(level, level->goals[i].x, level->goals[i].y);
       if(entity != nullptr && !IsActing(entity)){
+        if(level->goals[i].blink_timer == 0 && HasBehaviour(entity, Behaviour::IS_PLAYER)){
+          PlaySmokeCutscene(data);
+        }
         level->goals[i].blink_timer += dt;
       }
       else{
@@ -175,9 +188,13 @@ extern "C" {
           goals_reached++;
         }
       }
-      if(goals_reached == level->goalCount){
-        gameplay->currentLevelIndex++;
-        StartLevel(gameplay, arena_commands, arena_entities);
+      // Wait until movement has settled, otherwise the early return would freeze the move animation forever.
+      if(goals_reached == level->goalCount && !are_entities_acting){
+        // The next level loads once the cutscene has finished.
+        gameplay->pending_next_level = true;
+        if(!data->scenes.cutscene.active){
+          PlaySmokeCutscene(data);
+        }
         return;
       }      
     }
@@ -324,7 +341,22 @@ extern "C" {
       UpdateMenu(data);
       break;
     case SCENE_TYPES::GAME:
-      UpdateGame(gameplay, &data->input, data->arena_scratch, data->arena_commands, data->arena_entities, dt);
+      if(data->scenes.cutscene.active){
+        if(!UpdateCutscene(&data->scenes.cutscene, dt) && gameplay->pending_next_level){
+          gameplay->pending_next_level = false;
+          gameplay->currentLevelIndex++;
+          if(gameplay->levels[gameplay->currentLevelIndex].level_path == nullptr){
+            // No more levels: go back to the menu instead of loading an empty level.
+            gameplay->currentLevelIndex = 0;
+            ChangeScene(data, SCENE_TYPES::MAINMENU);
+          }
+          else{
+            StartLevel(gameplay, data->arena_commands, data->arena_entities);
+          }
+        }
+        break;
+      }
+      UpdateGame(gameplay, &data->input, data->arena_scratch, data->arena_commands, data->arena_entities, dt, data);
       break;
     case SCENE_TYPES::CREDITS:
       break;
@@ -380,6 +412,7 @@ extern "C" {
       case SCENE_TYPES::GAME:
         RenderLevel(data, renderer);  
         RenderEntities(data, renderer);
+        DrawCutscene(&data->scenes.cutscene, renderer, GetSprite(SPRITE_ID::black_1x1, data->spriteBuffer));
         break;
       case SCENE_TYPES::CREDITS:
         break;

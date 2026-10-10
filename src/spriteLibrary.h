@@ -11,6 +11,7 @@ enum class SPRITE_ID{
   Medusa_Idle_Left,
   Medusa_Idle_Front,
   Medusa_Idle_Back,
+  SmokeCutscene,
   Golem,
   Siren,
   Dropshadow,
