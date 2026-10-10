@@ -1,12 +1,12 @@
 { "columns":9,
- "image":"..\/..\/..\/..\/ART\/Hell of a Time\/Tileset\/hell_of_a_time_dungeon_tileset.png",
+ "image":"..\/sprites\/hell_of_a_time_dungeon_tileset.png",
  "imageheight":144,
  "imagewidth":144,
  "margin":0,
  "name":"hell_of_a_time_dungeon_tileset",
  "spacing":0,
  "tilecount":81,
- "tiledversion":"1.12.1",
+ "tiledversion":"1.12.2",
  "tileheight":16,
  "tiles":[
         {
