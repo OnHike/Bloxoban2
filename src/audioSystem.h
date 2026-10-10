@@ -8,7 +8,7 @@ namespace Memory{
 enum class SFX_ID{
   FALLBACK,
   JUMP,
-  
+  SMOKE,  
   COUNT
 };
 

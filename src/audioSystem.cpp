@@ -11,6 +11,7 @@ AudioSystem* g_audioSystem;
 static const SoundDataEntry all_sound_data[] = {
   {SFX_ID::FALLBACK, "assets/audio/sfx/fallback.wav"},
   {SFX_ID::JUMP, "assets/audio/sfx/fallback.wav"},
+  {SFX_ID::SMOKE, "assets/audio/sfx/Smoke.wav"},
 };
 
 void InitializeAudioSystem(AudioSystem* audio, Memory::Arena* arena_main){

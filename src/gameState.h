@@ -3,6 +3,7 @@
 #include "audioSystem.h"
 #include "camera.h"
 #include "command.h"
+#include "cutscene.h"
 #include "entity.h"
 #include "fontLibrary.h"
 #include "imgui/imgui_internal.h"
@@ -33,6 +34,7 @@ struct Gameplay {
   int input_buffer_write_count;
   int input_buffer_read_count;
   bool initialized;
+  bool pending_next_level;
   int activePlayerIndex;
   Entity** activePlayerBuffer;
 };
@@ -59,6 +61,7 @@ struct Credits {
 struct Scenes{
   Gameplay gameplay;
   MainMenu mainMenu;
+  Cutscene cutscene;
   TitleScreen titlescreen;
   Credits credts;
 };
