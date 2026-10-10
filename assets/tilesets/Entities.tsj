@@ -7,56 +7,42 @@
     },
  "margin":0,
  "name":"Entities",
+ "properties":[
+        {
+         "name":"Walkable",
+         "type":"bool",
+         "value":false
+        }],
  "spacing":0,
- "tilecount":3,
- "tiledversion":"1.12.1",
- "tileheight":16,
+ "tilecount":4,
+ "tiledversion":"1.12.2",
+ "tileheight":32,
  "tiles":[
         {
-         "height":16,
          "id":0,
-         "image":"..\/sprites\/medusa_idle_front.png",
-         "imageheight":24,
-         "imagewidth":24,
-         "properties":[
-                {
-                 "name":"entity_name",
-                 "type":"string",
-                 "value":"medusa"
-                }],
-         "width":16,
-         "x":3,
-         "y":6
+         "image":"..\/sprites\/Smough_FrontSprite.png",
+         "imageheight":32,
+         "imagewidth":32
         }, 
         {
          "id":1,
-         "image":"..\/sprites\/player.png",
-         "imageheight":16,
-         "imagewidth":16,
-         "properties":[
-                {
-                 "name":"entity_name",
-                 "type":"string",
-                 "value":"demon"
-                }]
+         "image":"..\/sprites\/Item_Cigarette.png",
+         "imageheight":32,
+         "imagewidth":32
         }, 
         {
-         "height":16,
          "id":2,
-         "image":"..\/sprites\/rock.png",
-         "imageheight":20,
-         "imagewidth":20,
-         "properties":[
-                {
-                 "name":"entity_name",
-                 "type":"string",
-                 "value":"rock"
-                }],
-         "width":16,
-         "x":2,
-         "y":3
+         "image":"..\/sprites\/Item_BaseBox.png",
+         "imageheight":32,
+         "imagewidth":32
+        }, 
+        {
+         "id":3,
+         "image":"..\/sprites\/Freak.png",
+         "imageheight":32,
+         "imagewidth":32
         }],
- "tilewidth":16,
+ "tilewidth":32,
  "type":"tileset",
  "version":"1.10"
 }
