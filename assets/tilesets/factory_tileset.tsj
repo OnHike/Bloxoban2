@@ -1,0 +1,14 @@
+{ "columns":6,
+ "image":"..\/sprites\/SpriteSheet_FloorAndWAlls.png",
+ "imageheight":170,
+ "imagewidth":204,
+ "margin":0,
+ "name":"factory_tileset",
+ "spacing":0,
+ "tilecount":30,
+ "tiledversion":"1.12.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.10"
+}

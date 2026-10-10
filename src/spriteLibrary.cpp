@@ -25,7 +25,7 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::black_1x1, "assets/sprites/1x1_black.png",0,0},
   {SPRITE_ID::titlescreen_background, "assets/sprites/titlescreen.png"},
   {SPRITE_ID::selection_marker, "assets/sprites/selection_marker.png",9,9},
-  {SPRITE_ID::dungeon_tileset, "assets/sprites/hell_of_a_time_dungeon_tileset.png",0,0, 9, 9},
+  {SPRITE_ID::dungeon_tileset, "assets/sprites/SpriteSheet_WallsAndFloor.png",0,0, 9, 9},
   {SPRITE_ID::Goal, "assets/sprites/goal.png",8, 8, 8, 1},
   {SPRITE_ID::Menu_Horizon, "assets/sprites/mainmenu_background.png"},
   {SPRITE_ID::Menu_Cloud_Back, "assets/sprites/mainmenu_cloud_back.png"},
