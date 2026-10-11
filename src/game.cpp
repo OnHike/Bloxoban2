@@ -29,8 +29,9 @@ extern "C" {
     assert(gameplay->initialized == false);
     gameplay->currentLevelIndex = 0;
     gameplay->pending_next_level = false;
-    CreateLevel(arena_levels, &gameplay->levels[0], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_03.tmj");
-    CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_01.tmj");
+    CreateLevel(arena_levels, &gameplay->levels[0], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_00.tmj");
+    CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_03.tmj");
+    CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_04.tmj");
     gameplay->initialized = true;
   }
 
