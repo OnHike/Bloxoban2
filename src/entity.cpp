@@ -43,7 +43,7 @@ switch (entity->id) {
     entity->strength = 999;
     break;*/
   case ENTITY_ID::MEDUSA:
-    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
+    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT | STRONG));
     AddBehaviour(entity, Behaviour::JUMPS);
     entity->strength = 1;
     break;  
@@ -55,7 +55,7 @@ switch (entity->id) {
     SetBehaviour(entity, (Behaviour)CAN_MOVE);
     break;
   case ENTITY_ID::METAL_BOX:
-	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | UNPUSHABLE));
+	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | HEAVY));
     break;
   case ENTITY_ID::CIGARETTE:
 	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | IS_PASSTHROUGH));
