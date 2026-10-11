@@ -367,7 +367,7 @@ extern "C" {
   }
  
   
-  bool TryMove(Entity* mover, LevelData* level, CommandBuffer* cmd_buffer, int xDir, int yDir, int strength, bool fromStrongPush = false)
+  bool TryMove(Entity* mover, LevelData* level, CommandBuffer* cmd_buffer, int xDir, int yDir, int strength, bool fromStrongPush)
   {
     if(HasBehaviour(mover, CAN_MOVE) == false && HasBehaviour(mover, CAN_MOVE_HORIZONTAL) == false && HasBehaviour(mover, CAN_MOVE_VERTICAL) == false){
       return false;
@@ -423,7 +423,7 @@ extern "C" {
                 }
                 
 			}
-            if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush)) {
+            if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush || fromStrongPush || HasBehaviour(mover, STRONG) == true)) {
                 MoveCommand mv(mover, xDir, yDir);
                 AddBehaviour(mover, Behaviour::IS_PUSHING);
                 Push(cmd_buffer, mv, level);

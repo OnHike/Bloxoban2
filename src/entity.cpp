@@ -43,7 +43,7 @@ switch (entity->id) {
     entity->strength = 999;
     break;*/
   case ENTITY_ID::MEDUSA:
-    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
+    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT | STRONG));
     AddBehaviour(entity, Behaviour::JUMPS);
     entity->strength = 1;
     break;  
