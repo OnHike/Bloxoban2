@@ -14,6 +14,9 @@ void Execute(AnyCommand cmd, LevelData* level, CommandBuffer* commandBuffer, Fro
       mv.entity->y_prev = mv.entity->y;
       mv.entity->x += mv.xDir;
       mv.entity->y += mv.yDir;
+      if(mv.turn_to_face){
+        mv.entity->facing_current = DirectionFromXY(mv.xDir, mv.yDir);
+      }
       if(fromRedo == FromRedo::Yes){
         mv.entity->progress_01 = 1;
       }
@@ -101,6 +104,10 @@ void Undo(CommandBuffer* cmdBuffer, LevelData* level){
       MoveCommand mv = cmd.move;
       mv.entity->x -= mv.xDir;      
       mv.entity->y -= mv.yDir;
+      if(mv.turn_to_face){
+        mv.entity->facing_current = mv.facing_before;
+        mv.entity->facing_previous = mv.facing_before;
+      }
       mv.entity->progress_01 = 1;
       }
        break;

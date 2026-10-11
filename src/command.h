@@ -103,11 +103,15 @@ struct MoveCommand : Command {
   Entity* entity;
   int xDir;
   int yDir;
+  bool turn_to_face;        // Face the move direction (used when an entity is pushed).
+  Direction facing_before;
 
-  MoveCommand(Entity* entity, int xDir, int yDir){
+  MoveCommand(Entity* entity, int xDir, int yDir, bool turn_to_face = false){
     this->entity = entity;
     this->xDir = xDir;
     this->yDir = yDir;
+    this->turn_to_face = turn_to_face;
+    this->facing_before = entity->facing_current;
     type = CMD_TYPE::MOVE;
   }
 };

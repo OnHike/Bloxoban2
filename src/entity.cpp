@@ -64,7 +64,7 @@ switch (entity->id) {
       SetBehaviour(entity, (Behaviour)(CAN_MOVE | CAN_MOVE_HORIZONTAL));
       break;
   case ENTITY_ID::FORKLIFT:
-      SetBehaviour(entity, (Behaviour)(CAN_MOVE | STRONG | FLAMMABLE));
+      SetBehaviour(entity, (Behaviour)(CAN_MOVE | STRONG | FLAMMABLE | TURNS_WHEN_PUSHED));
       break;
         case ENTITY_ID::FIRE: {
       SetBehaviour(entity, (Behaviour)(FIRE_HAZARD));

@@ -23,6 +23,7 @@ enum Behaviour : uint32_t {
 	STRONG = 1 << 12,
 	FIRE_HAZARD = 1 << 13,
 	FLAMMABLE = 1 << 14,
+	TURNS_WHEN_PUSHED = 1 << 15,
 };
 
 enum class Actions {
