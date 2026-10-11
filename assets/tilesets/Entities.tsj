@@ -14,7 +14,7 @@
          "value":false
         }],
  "spacing":0,
- "tilecount":5,
+ "tilecount":6,
  "tiledversion":"1.12.2",
  "tileheight":32,
  "tiles":[
@@ -45,6 +45,12 @@
         {
          "id":82,
          "image":"..\/sprites\/Item_Cigarette.png",
+         "imageheight":32,
+         "imagewidth":32
+        }, 
+        {
+         "id":5,
+         "image":"..\/sprites\/Cart.png",
          "imageheight":32,
          "imagewidth":32
         }],

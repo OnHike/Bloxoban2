@@ -16,6 +16,7 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Demon, "assets/sprites/Freak.png"},
   {SPRITE_ID::Rock, "assets/sprites/Item_BaseBox.png", 16, 16},
   {SPRITE_ID::Metal_Box, "assets/sprites/Item_Box_Metal.png", 16, 16 }, 
+  { SPRITE_ID::Cart, "assets/sprites/Cart.png", 16, 16 },
   {SPRITE_ID::Cigarette, "assets/sprites/Item_Cigarette.png", 16, 16},
   {SPRITE_ID::Medusa_Rotate, "assets/sprites/Smough_SpriteSheet_Turn.png", 16, 24, 4, 1},
   {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/Smough_SpriteSheet_Left.png", 16, 24, 2, 1, 2},
@@ -29,7 +30,7 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::dungeon_tileset, "assets/sprites/SpriteSheet_WallsAndFloor.png",0,0, 6, 5},
   {SPRITE_ID::Goal, "assets/sprites/Item_Cigarette.png",16, 16},
   {SPRITE_ID::Forklift_Left, "assets/sprites/Forklift_Left.png", 16, 16, 2, 1, 2},
-  {SPRITE_ID::Forklift_Right, "assets/sprites/Forklift_Right.png", 16, 16, 2, 1, 2},
+  {SPRITE_ID::FORKLIFT_RIGHT, "assets/sprites/Forklift_Right.png", 16, 16, 2, 1, 2},
   {SPRITE_ID::Forklift_Front, "assets/sprites/Forklift_Front.png", 16, 16, 2, 1, 2},
   {SPRITE_ID::Forklift_Back, "assets/sprites/Forklift_Back.png", 16, 16, 2, 1, 2},
   {SPRITE_ID::Menu_Horizon, "assets/sprites/TITEL_LAYER1.png"},
@@ -117,8 +118,8 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
 	  return GetSprite(SPRITE_ID::Cigarette, spritebuffer);
   case ENTITY_ID::METAL_BOX:
 	  return GetSprite(SPRITE_ID::Metal_Box, spritebuffer);
-  case ENTITY_ID::FORKLIFT:
-      return GetSprite(SPRITE_ID::Forklift_Right, spritebuffer);
+  case ENTITY_ID::CART:
+      return GetSprite(SPRITE_ID::Cart, spritebuffer);
   default:
     return GetSprite(SPRITE_ID::Fallback, spritebuffer);
   }  

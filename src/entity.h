@@ -50,7 +50,7 @@ enum class ENTITY_ID : uint8_t {
 	ROCK = 2,
 	METAL_BOX = 3,
 	CIGARETTE = 4,
-	FORKLIFT = 5,
+	CART = 5,
 
   //SIREN = 3,
   //GOLEM = 4,

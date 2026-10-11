@@ -60,8 +60,8 @@ switch (entity->id) {
   case ENTITY_ID::CIGARETTE:
 	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | IS_PASSTHROUGH));
 	  break;
-  case ENTITY_ID::FORKLIFT:
-      SetBehaviour(entity, (Behaviour)(CAN_MOVE | STRONG));
+  case ENTITY_ID::CART:
+      SetBehaviour(entity, (Behaviour)(CAN_MOVE | CAN_MOVE_HORIZONTAL));
   }
 
 }
