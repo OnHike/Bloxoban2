@@ -55,7 +55,7 @@ switch (entity->id) {
     SetBehaviour(entity, (Behaviour)CAN_MOVE);
     break;
   case ENTITY_ID::METAL_BOX:
-	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | UNPUSHABLE));
+	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | HEAVY));
     break;
   case ENTITY_ID::CIGARETTE:
 	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | IS_PASSTHROUGH));

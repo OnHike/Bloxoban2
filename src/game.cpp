@@ -367,10 +367,15 @@ extern "C" {
   }
  
   
-  bool TryMove(Entity* mover, LevelData* level,CommandBuffer* commandBuffer, int xDir, int yDir, int strength){
+  bool TryMove(Entity* mover, LevelData* level, CommandBuffer* cmd_buffer, int xDir, int yDir, int strength, bool fromStrongPush = false)
+  {
     if(HasBehaviour(mover, CAN_MOVE) == false && HasBehaviour(mover, CAN_MOVE_HORIZONTAL) == false && HasBehaviour(mover, CAN_MOVE_VERTICAL) == false){
       return false;
     }
+
+	if (HasBehaviour(mover, STRONG)) {
+		strength = 1000;
+	}
 
     if(strength < 0){
       return false;
@@ -389,7 +394,7 @@ extern "C" {
     if(stepInto_entity == nullptr || HasBehaviour(stepInto_entity, IS_PASSTHROUGH)){
       if(IsWalkable(test_x, test_y, level)){
         MoveCommand mv(mover, xDir, yDir);
-        Push(commandBuffer, mv, level);
+        Push(cmd_buffer, mv, level);
         return true;
       }
       return false;
@@ -408,10 +413,20 @@ extern "C" {
 		}
 
         if (allowedToMove) {
-            if (TryMove(stepInto_entity, level, commandBuffer, xDir, yDir, --strength)) {
+            bool strongPush = false;
+			if (HasBehaviour(stepInto_entity, HEAVY)) {
+				if (!HasBehaviour(mover, STRONG) && !fromStrongPush) {
+					return false;
+				}
+                else {
+                    strongPush = true;
+                }
+                
+			}
+            if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush)) {
                 MoveCommand mv(mover, xDir, yDir);
                 AddBehaviour(mover, Behaviour::IS_PUSHING);
-                Push(commandBuffer, mv, level);
+                Push(cmd_buffer, mv, level);
                 return true;
             }
         }

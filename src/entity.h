@@ -18,7 +18,9 @@ enum Behaviour : uint32_t {
   IS_PUSHING = 1 << 7,
   IS_PASSTHROUGH = 1 << 8,
   CAN_MOVE_HORIZONTAL = 1 << 9,
-  CAN_MOVE_VERTICAL = 1 << 10
+  CAN_MOVE_VERTICAL = 1 << 10,
+  HEAVY = 1 << 11,
+  STRONG = 1 << 12
 };
 
 enum class Actions {
