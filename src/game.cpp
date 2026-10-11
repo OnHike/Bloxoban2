@@ -56,6 +56,12 @@ extern "C" {
     ResetCommandBuffer(gameplay->commandBuffer);
     Reset(arena_commands);    
     CreateEntities(&gameplay->levels[gameplay->currentLevelIndex], arena_entities);
+    LevelData* level = &gameplay->levels[gameplay->currentLevelIndex];
+    level->goals_reached = 0;
+    for (int i = 0; i < level->goalCount; i++) {
+      level->goals[i].collected = false;
+      level->goals[i].blink_timer = 0;
+    }
     gameplay->activePlayerIndex = 0;
   }
     
@@ -77,16 +83,16 @@ extern "C" {
         Gameplay* gameplay = &data->scenes.gameplay;
         assert(gameplay->initialized);
         StartLevel(gameplay, data->arena_commands, data->arena_entities);
-       break;
+        break;
       }
       case SCENE_TYPES::CREDITS:
-       break;
+        break;
       case SCENE_TYPES::NONE:
         assert(false);
         break;
       }
-   }
-   
+    }
+    
    bool HandleEvents(GameData *data, SDL_Event event){
     DEV::ProcessEvents(&event);
 
@@ -164,39 +170,40 @@ extern "C" {
     }
 
     for (int i = 0; i < level->goalCount; i++) {
-      Entity* entity = GetEntity(level, level->goals[i].x, level->goals[i].y);
+      Goal* goal = &level->goals[i];
+      if(goal->collected){
+        continue;
+      }
+      Entity* entity = GetEntity(level, goal->x, goal->y);
       if(entity != nullptr && !IsActing(entity)){
-        if(level->goals[i].blink_timer == 0 && HasBehaviour(entity, Behaviour::IS_PLAYER)){
+        if(HasBehaviour(entity, Behaviour::IS_PLAYER)){
+          // Share the timestamp of the move that landed here so one undo reverts both.
+          CommandBuffer* commands = gameplay->commandBuffer;
+          uint32_t saved_timestamp = commands->timestamp;
+          if(commands->timestamp > 0){
+            commands->timestamp -= 1;
+          }
+          Push(commands, CollectGoalCommand(i), level);
+          commands->timestamp = saved_timestamp;
           PlaySmokeCutscene(data);
         }
-        level->goals[i].blink_timer += dt;
+        else{
+          goal->blink_timer += dt;
+        }
       }
       else{
-        level->goals[i].blink_timer = 0;
+        goal->blink_timer = 0;
       }
     }
 
-    if(level->goalCount > 0){
-      int goals_reached = 0;
-      for (int i = 0; i < level->goalCount; i++) {
-        Goal goal = level->goals[i];
-        Entity* entity = GetEntity(level, goal.x, goal.y);
-        if(entity == nullptr){
-          break;
-        }
-        else if(HasBehaviour(entity, Behaviour::IS_PLAYER)){
-          goals_reached++;
-        }
+    // Wait until movement has settled, otherwise the early return would freeze the move animation forever.
+    if(level->goalCount > 0 && level->goals_reached == level->goalCount && !are_entities_acting){
+      // The next level loads once the cutscene has finished.
+      gameplay->pending_next_level = true;
+      if(!data->scenes.cutscene.active){
+        PlaySmokeCutscene(data);
       }
-      // Wait until movement has settled, otherwise the early return would freeze the move animation forever.
-      if(goals_reached == level->goalCount && !are_entities_acting){
-        // The next level loads once the cutscene has finished.
-        gameplay->pending_next_level = true;
-        if(!data->scenes.cutscene.active){
-          PlaySmokeCutscene(data);
-        }
-        return;
-      }      
+      return;
     }
 
     for (int i = 0; i < level->entityCount; i++){

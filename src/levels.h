@@ -10,6 +10,7 @@ struct Goal{
   int x;
   int y;
   float blink_timer;
+  bool collected;
 };
 
 struct LevelData{
@@ -18,6 +19,7 @@ struct LevelData{
   uint16_t* cells;
   Goal* goals;
   int goalCount; 
+  int goals_reached;
   const char* level_path;
   Entity* entityBuffer;
   int entityCount;
