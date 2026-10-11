@@ -28,11 +28,11 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::selection_marker, "assets/sprites/selection_marker.png",9,9},
   {SPRITE_ID::dungeon_tileset, "assets/sprites/SpriteSheet_WallsAndFloor.png",0,0, 6, 5},
   {SPRITE_ID::Goal, "assets/sprites/goal.png",8, 8, 8, 1},
-  {SPRITE_ID::Menu_Horizon, "assets/sprites/mainmenu_background.png"},
-  {SPRITE_ID::Menu_Cloud_Back, "assets/sprites/mainmenu_cloud_back.png"},
-  {SPRITE_ID::Menu_Cloud_Front, "assets/sprites/mainmenu_cloud_front.png"},
-  {SPRITE_ID::Menu_Middle, "assets/sprites/mainmenu_middle.png"},
-  {SPRITE_ID::Menu_Front, "assets/sprites/mainmenu_front.png"},
+  {SPRITE_ID::Menu_Horizon, "assets/sprites/TITEL_LAYER1.png"},
+  {SPRITE_ID::Menu_Cloud_Back, "assets/sprites/TITEL_LAYER2.png"},
+  {SPRITE_ID::Menu_Cloud_Front, "assets/sprites/TITEL_LAYER3.png"},
+  {SPRITE_ID::Menu_Middle, "assets/sprites/TITEL_LAYER4.png"},
+  {SPRITE_ID::Menu_Front, "assets/sprites/TITEL_LAYER5.png"},
   {SPRITE_ID::Button_Basic, "assets/sprites/basic_button.png",0,0,3,3},
   };
 
