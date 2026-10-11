@@ -153,6 +153,9 @@ Sprite* GetSpriteFromID(ENTITY_ID id, Sprite* spriteBuffer){
  case ENTITY_ID::METAL_BOX:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Metal_Box];
    break;
+case ENTITY_ID::CART:
+   sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Cart];
+   break;
  /*
  case ENTITY_ID::SIREN:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Siren];
