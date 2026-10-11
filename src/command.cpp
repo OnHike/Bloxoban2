@@ -67,6 +67,12 @@ void Execute(AnyCommand cmd, LevelData* level, CommandBuffer* commandBuffer, Fro
       *swap->value_to_change = swap->index_current;
       break;
       }
+    case CMD_TYPE::COLLECT_GOAL:{
+      Goal* goal = &level->goals[cmd.collect_goal.goal_index];
+      goal->collected = true;
+      level->goals_reached++;
+      break;
+      }
     }
 }
 
@@ -132,6 +138,13 @@ void Undo(CommandBuffer* cmdBuffer, LevelData* level){
       case CMD_TYPE::SWAP_ACTIVE:{
           SwapActiveEntityCommand* swap = &cmd.swap_active;
           *swap->value_to_change = swap->index_previous;
+          break;
+        }
+      case CMD_TYPE::COLLECT_GOAL:{
+          Goal* goal = &level->goals[cmd.collect_goal.goal_index];
+          goal->collected = false;
+          goal->blink_timer = 0;
+          level->goals_reached--;
           break;
         }
       }

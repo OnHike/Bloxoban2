@@ -9,12 +9,22 @@ enum class CMD_TYPE : uint8_t{
   MODIFY_BEHAVIOUR = 3,
   ADD = 4,
   REMOVE = 5,
-  SWAP_ACTIVE = 6
+  SWAP_ACTIVE = 6,
+  COLLECT_GOAL = 7
 };
 
 struct Command {
   CMD_TYPE type = CMD_TYPE::NONE;
   uint32_t timestamp;
+};
+
+struct CollectGoalCommand : Command {
+  int goal_index;
+
+  CollectGoalCommand(int goal_index){
+    this->goal_index = goal_index;
+    type = CMD_TYPE::COLLECT_GOAL;
+  }
 };
 
 struct SwapActiveEntityCommand : Command {
@@ -110,6 +120,7 @@ union AnyCommand {
   AddCommand add;
   RemoveCommand remove;
   SwapActiveEntityCommand swap_active;
+  CollectGoalCommand collect_goal;
   
   AnyCommand(MoveCommand mov){
     move = mov;
@@ -128,6 +139,9 @@ union AnyCommand {
   }
   AnyCommand(SwapActiveEntityCommand swa){
     swap_active = swa;
+  }
+  AnyCommand(CollectGoalCommand col){
+    collect_goal = col;
   }
 };
 
