@@ -21,7 +21,6 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/Smough_SpriteSheet_Left.png", 16, 24, 2, 1, 2},
   {SPRITE_ID::Medusa_Idle_Front, "assets/sprites/Smough_SpriteSheet_Front.png", 16, 24, 2, 1, 2},
   {SPRITE_ID::Medusa_Idle_Back, "assets/sprites/Smough_SpriteSheet_Back.png", 16, 24, 2, 1, 2},
-  // TODO: Add Cutscene data here
   {SPRITE_ID::SmokeCutscene, "assets/sprites/SmokeCutscene.png", 0, 0, 2, 1, 1},
   {SPRITE_ID::Dropshadow, "assets/sprites/dropshadow.png", 8, 8},
   {SPRITE_ID::black_1x1, "assets/sprites/1x1_black.png",0,0},
