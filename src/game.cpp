@@ -413,6 +413,12 @@ extern "C" {
     }
       
     if(!HasBehaviour(stepInto_entity, UNPUSHABLE)){
+        if (HasBehaviour(stepInto_entity, FIRE_HAZARD) && HasBehaviour(mover, FLAMMABLE)) {
+            //if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
+            RemoveCommand r(mover);
+            Push(cmd_buffer, r, level);
+            return true;
+        }
         bool allowedToMove = false;
         if (HasBehaviour(stepInto_entity, CAN_MOVE)) {
             allowedToMove = true;
@@ -423,6 +429,8 @@ extern "C" {
 		else if (HasBehaviour(stepInto_entity, CAN_MOVE_VERTICAL)) {
 			allowedToMove = true;
 		}
+		
+		
 
         if (allowedToMove) {
             bool strongPush = false;
@@ -436,12 +444,7 @@ extern "C" {
                 
 			}
 
-            if (HasBehaviour(mover, FLAMMABLE) && HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
-				//if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
-				AnyCommand type = CMD_TYPE::REMOVE;
-                Push(cmd_buffer, type, level);
-                return true;
-            }
+            
             
             if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush || fromStrongPush || HasBehaviour(mover, STRONG) == true)) {
                 MoveCommand mv(mover, xDir, yDir);
