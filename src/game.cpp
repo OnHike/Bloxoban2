@@ -263,7 +263,7 @@ extern "C" {
 
     Entity* entity = GetActiveEntity(gameplay);
     
-    if(!HasBehaviour(entity, (Behaviour)(RESPOND_TO_INPUT | CAN_MOVE))){
+    if(!HasBehaviour(entity, (Behaviour)(RESPOND_TO_INPUT)) && (!HasBehaviour(entity, (Behaviour)(CAN_MOVE)) || !HasBehaviour(entity, (Behaviour)(CAN_MOVE_HORIZONTAL)) || !HasBehaviour(entity, (Behaviour)(CAN_MOVE_VERTICAL)))){
       return;
     }
     
@@ -368,7 +368,7 @@ extern "C" {
  
   
   bool TryMove(Entity* mover, LevelData* level,CommandBuffer* commandBuffer, int xDir, int yDir, int strength){
-    if(HasBehaviour(mover, CAN_MOVE) == false){
+    if(HasBehaviour(mover, CAN_MOVE) == false && HasBehaviour(mover, CAN_MOVE_HORIZONTAL) == false && HasBehaviour(mover, CAN_MOVE_VERTICAL) == false){
       return false;
     }
 
@@ -380,7 +380,13 @@ extern "C" {
     int test_y = mover->y + yDir;
     Entity* stepInto_entity = GetEntity(level, test_x, test_y);
     uint16_t stepInto_tile_id = GetCellID(level, test_x, test_y);
-    if(stepInto_entity == nullptr){
+	if (HasBehaviour(mover, CAN_MOVE_HORIZONTAL) && yDir != 0 && xDir == 0) {
+		return false;
+	}
+	if (HasBehaviour(mover, CAN_MOVE_VERTICAL) && xDir != 0 && yDir == 0) {
+		return false;
+	}
+    if(stepInto_entity == nullptr || HasBehaviour(stepInto_entity, IS_PASSTHROUGH)){
       if(IsWalkable(test_x, test_y, level)){
         MoveCommand mv(mover, xDir, yDir);
         Push(commandBuffer, mv, level);
@@ -389,13 +395,26 @@ extern "C" {
       return false;
     }
       
-    if(HasBehaviour(stepInto_entity, CAN_MOVE) && !HasBehaviour(stepInto_entity, UNPUSHABLE)){
-      if(TryMove(stepInto_entity, level,commandBuffer, xDir, yDir, --strength)){
-        MoveCommand mv(mover, xDir, yDir);
-        AddBehaviour(mover, Behaviour::IS_PUSHING);
-        Push(commandBuffer, mv, level);
-        return true;
-      }
+    if(!HasBehaviour(stepInto_entity, UNPUSHABLE)){
+        bool allowedToMove = false;
+        if (HasBehaviour(stepInto_entity, CAN_MOVE)) {
+            allowedToMove = true;
+        }
+		else if (HasBehaviour(stepInto_entity, CAN_MOVE_HORIZONTAL)) {
+            allowedToMove = true;
+		}
+		else if (HasBehaviour(stepInto_entity, CAN_MOVE_VERTICAL)) {
+			allowedToMove = true;
+		}
+
+        if (allowedToMove) {
+            if (TryMove(stepInto_entity, level, commandBuffer, xDir, yDir, --strength)) {
+                MoveCommand mv(mover, xDir, yDir);
+                AddBehaviour(mover, Behaviour::IS_PUSHING);
+                Push(commandBuffer, mv, level);
+                return true;
+            }
+        }
     }
 
     return false;

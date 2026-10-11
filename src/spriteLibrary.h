@@ -7,6 +7,8 @@ enum class SPRITE_ID{
   Fallback,
   Rock,
   Demon,
+  Cigarette,
+  Metal_Box,
   Medusa_Rotate,
   Medusa_Idle_Left,
   Medusa_Idle_Front,

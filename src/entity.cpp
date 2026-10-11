@@ -54,7 +54,14 @@ switch (entity->id) {
   case ENTITY_ID::ROCK:
     SetBehaviour(entity, (Behaviour)CAN_MOVE);
     break;
+  case ENTITY_ID::METAL_BOX:
+	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | UNPUSHABLE));
+    break;
+  case ENTITY_ID::CIGARETTE:
+	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | IS_PASSTHROUGH));
+	  break;
   }
+
 }
 
 void SetBehaviour(Entity* entity, Behaviour flags){

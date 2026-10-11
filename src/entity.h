@@ -15,7 +15,10 @@ enum Behaviour : uint32_t {
   CAN_ROTATE = 1 << 4,
   UNPUSHABLE = 1 << 5,
   JUMPS = 1 << 6,
-  IS_PUSHING = 1 << 7
+  IS_PUSHING = 1 << 7,
+  IS_PASSTHROUGH = 1 << 8,
+  CAN_MOVE_HORIZONTAL = 1 << 9,
+  CAN_MOVE_VERTICAL = 1 << 10
 };
 
 enum class Actions {
@@ -43,6 +46,8 @@ enum class ENTITY_ID : uint8_t {
   MEDUSA = 0,
   DEMON = 1,
   ROCK = 2,
+  METAL_BOX = 3,
+  CIGARETTE = 4,
   //SIREN = 3,
   //GOLEM = 4,
 };

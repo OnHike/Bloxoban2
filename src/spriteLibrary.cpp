@@ -13,12 +13,14 @@ const char* FALLBACK_PATH = "assets/sprites/fallback.png";
 
 static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Fallback, FALLBACK_PATH,8,8},
-  {SPRITE_ID::Demon, "assets/sprites/player.png"},
-  {SPRITE_ID::Rock, "assets/sprites/rock.png", 10, 18},
-  {SPRITE_ID::Medusa_Rotate, "assets/sprites/medusa_rotate.png", 12, 24, 8, 1},
-  {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/medusa_idle_left.png", 12, 24, 4, 1, 8},
-  {SPRITE_ID::Medusa_Idle_Front, "assets/sprites/medusa_idle_front.png", 12, 24, 4, 1, 8},
-  {SPRITE_ID::Medusa_Idle_Back, "assets/sprites/medusa_idle_back.png", 12, 24, 4, 1, 8},
+  {SPRITE_ID::Demon, "assets/sprites/Freak.png"},
+  {SPRITE_ID::Rock, "assets/sprites/Item_BaseBox.png", 16, 16},
+  {SPRITE_ID::Metal_Box, "assets/sprites/Item_MetalBox.png", 16, 16 }, 
+  {SPRITE_ID::Cigarette, "assets/sprites/Item_Cigarette.png", 16, 16},
+  {SPRITE_ID::Medusa_Rotate, "assets/sprites/Smough_SpriteSheet_Turn.png", 16, 24, 4, 1},
+  {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/Smough_SpriteSheet_Left.png", 16, 24, 2, 1, 2},
+  {SPRITE_ID::Medusa_Idle_Front, "assets/sprites/Smough_SpriteSheet_Front.png", 16, 24, 2, 1, 2},
+  {SPRITE_ID::Medusa_Idle_Back, "assets/sprites/Smough_SpriteSheet_Back.png", 16, 24, 2, 1, 2},
   // TODO: Add Cutscene data here
   {SPRITE_ID::SmokeCutscene, "assets/sprites/SmokeCutscene.png", 0, 0, 2, 1, 1},
   {SPRITE_ID::Dropshadow, "assets/sprites/dropshadow.png", 8, 8},
@@ -44,13 +46,13 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
     int end = 0;
     switch(entity->facing_previous){
     case Direction::RIGHT:
-      start = 6;
+      start = 3;
       break;
     case Direction::LEFT:
-      start = 2;
+      start = 1;
       break;
     case Direction::UP:
-      start = 4;
+      start = 2;
       break;
     case Direction::DOWN:
       start = 0;
@@ -59,13 +61,13 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
 
     switch(entity->facing_current){
     case Direction::RIGHT:
-      end = 6;
+      end = 3;
       break;
     case Direction::LEFT:
-      end = 2;
+      end = 1;
       break;
     case Direction::UP:
-      end = 4;
+      end = 2;
       break;
     case Direction::DOWN:
       end = 0;
@@ -79,6 +81,7 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
     int current_frame = (((int)lerp(start, end, entity->progress_01) + sprite_count) % sprite_count);
     return {current_frame, spritesheet};
   }
+
 
   switch (entity->id) {
   case ENTITY_ID::MEDUSA:{
@@ -107,6 +110,10 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
     return GetSprite(SPRITE_ID::Demon, spritebuffer);
   case ENTITY_ID::ROCK:
     return GetSprite(SPRITE_ID::Rock, spritebuffer);
+  case ENTITY_ID::CIGARETTE:
+	  return GetSprite(SPRITE_ID::Cigarette, spritebuffer);
+  case ENTITY_ID::METAL_BOX:
+	  return GetSprite(SPRITE_ID::Metal_Box, spritebuffer);
   default:
     return GetSprite(SPRITE_ID::Fallback, spritebuffer);
   }  
@@ -133,7 +140,14 @@ Sprite* GetSpriteFromID(ENTITY_ID id, Sprite* spriteBuffer){
    break;
  case ENTITY_ID::MEDUSA:
    sprite_to_return = nullptr;
-   break;/*
+   break;
+ case ENTITY_ID::CIGARETTE:
+   sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Cigarette];
+   break;
+ case ENTITY_ID::METAL_BOX:
+   sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Metal_Box];
+   break;
+ /*
  case ENTITY_ID::SIREN:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Siren];
    break;
