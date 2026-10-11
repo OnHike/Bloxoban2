@@ -29,8 +29,10 @@ extern "C" {
     assert(gameplay->initialized == false);
     gameplay->currentLevelIndex = 0;
     gameplay->pending_next_level = false;
+    CreateLevel(arena_levels, &gameplay->levels[2], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_05.tmj");
     CreateLevel(arena_levels, &gameplay->levels[2], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_04.tmj");
     CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_03.tmj");
+    CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_forkliftTut.tmj");
     CreateLevel(arena_levels, &gameplay->levels[0], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_00.tmj");
     
     gameplay->initialized = true;
@@ -403,7 +405,7 @@ extern "C" {
 		return false;
 	}
 
-    if(stepInto_entity == nullptr || HasBehaviour(stepInto_entity, IS_PASSTHROUGH)){
+    if(stepInto_entity == nullptr){
       if(IsWalkable(test_x, test_y, level)){
         MoveCommand mv(mover, xDir, yDir, pushed && HasBehaviour(mover, TURNS_WHEN_PUSHED));
         Push(cmd_buffer, mv, level);
@@ -413,12 +415,12 @@ extern "C" {
     }
       
     if(!HasBehaviour(stepInto_entity, UNPUSHABLE)){
-        if (HasBehaviour(stepInto_entity, FIRE_HAZARD) && HasBehaviour(mover, FLAMMABLE)) {
-            //if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
-            RemoveCommand r(mover);
-            Push(cmd_buffer, r, level);
-            return true;
-        }
+        //if (HasBehaviour(stepInto_entity, FIRE_HAZARD) && HasBehaviour(mover, FLAMMABLE)) {
+        //    //if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
+        //    RemoveCommand r(mover);
+        //    Push(cmd_buffer, r, level);
+        //    return true;
+        //}
         bool allowedToMove = false;
         if (HasBehaviour(stepInto_entity, CAN_MOVE)) {
             allowedToMove = true;
@@ -427,6 +429,9 @@ extern "C" {
             allowedToMove = true;
 		}
 		else if (HasBehaviour(stepInto_entity, CAN_MOVE_VERTICAL)) {
+			allowedToMove = true;
+		}
+		else if (HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
 			allowedToMove = true;
 		}
 		
@@ -444,20 +449,35 @@ extern "C" {
                 
 			}
 
-            if (HasBehaviour(mover, FLAMMABLE) && HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
+            if (HasBehaviour(mover, FLAMMABLE) && HasBehaviour(stepInto_entity, FIRE_HAZARD) && !HasBehaviour(stepInto_entity, HEAVY)) {
 				//if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
 				RemoveCommand remove(mover);
                 Push(cmd_buffer, remove, level);
                 return true;
             }
             
-            if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush || fromStrongPush ||             HasBehaviour(mover, STRONG) == true, true)) {
-                            MoveCommand mv(mover, xDir, yDir, pushed && HasBehaviour(mover, TURNS_WHEN_PUSHED));
+            if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush || fromStrongPush || HasBehaviour(mover, STRONG) == true, true)) {
+                 MoveCommand mv(mover, xDir, yDir, pushed && HasBehaviour(mover, TURNS_WHEN_PUSHED));
                 AddBehaviour(mover, Behaviour::IS_PUSHING);
                 Push(cmd_buffer, mv, level);
 
 
                 return true;
+            }
+			else if (HasBehaviour(mover, HEAVY) && HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
+				RemoveCommand remove(stepInto_entity);
+                MoveCommand mv(mover, xDir, yDir, pushed && HasBehaviour(mover, TURNS_WHEN_PUSHED));
+                AddBehaviour(mover, Behaviour::IS_PUSHING);
+                Push(cmd_buffer, remove, level);
+                Push(cmd_buffer, mv, level);
+				
+				return true;
+			}
+            else if (HasBehaviour(mover, CAN_MOVE_HORIZONTAL) && HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
+                MoveCommand mv(mover, xDir, yDir, pushed && HasBehaviour(mover, TURNS_WHEN_PUSHED));
+                AddBehaviour(mover, Behaviour::IS_PUSHING);
+                Push(cmd_buffer, mv, level);
+				return true;
             }
         }
     }

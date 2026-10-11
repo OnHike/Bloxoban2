@@ -43,7 +43,7 @@ switch (entity->id) {
     entity->strength = 999;
     break;*/
   case ENTITY_ID::MEDUSA:
-    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT | STRONG));
+    SetBehaviour(entity, (Behaviour)(CAN_ROTATE | CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
     AddBehaviour(entity, Behaviour::JUMPS);
     entity->strength = 1;
     break;  
@@ -67,7 +67,7 @@ switch (entity->id) {
       SetBehaviour(entity, (Behaviour)(CAN_MOVE | STRONG | FLAMMABLE | TURNS_WHEN_PUSHED));
       break;
         case ENTITY_ID::FIRE: {
-      SetBehaviour(entity, (Behaviour)(FIRE_HAZARD));
+      SetBehaviour(entity, (Behaviour)(FIRE_HAZARD | IS_PASSTHROUGH));
       break;
   }
   }
