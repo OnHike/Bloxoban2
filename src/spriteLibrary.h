@@ -14,6 +14,7 @@ enum class SPRITE_ID{
   FORKLIFT_RIGHT,
   Forklift_Front,
   Forklift_Back,
+  Fire,
   Medusa_Rotate,
   Medusa_Idle_Left,
   Medusa_Idle_Front,

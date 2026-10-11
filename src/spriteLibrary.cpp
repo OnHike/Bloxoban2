@@ -16,7 +16,8 @@ static const SpriteDataEntry all_sprite_data[] = {
   {SPRITE_ID::Demon, "assets/sprites/Freak.png"},
   {SPRITE_ID::Rock, "assets/sprites/Item_BaseBox.png", 16, 16},
   {SPRITE_ID::Metal_Box, "assets/sprites/Item_Box_Metal.png", 16, 16 }, 
-  { SPRITE_ID::Cart, "assets/sprites/Cart.png", 16, 16 },
+  {SPRITE_ID::Cart, "assets/sprites/Cart.png", 16, 16 },
+  {SPRITE_ID::Fire, "assets/sprites/Fire_SpriteSheet.png", 16, 16, 3, 1, 4},
   {SPRITE_ID::Cigarette, "assets/sprites/Item_Cigarette.png", 16, 16},
   {SPRITE_ID::Medusa_Rotate, "assets/sprites/Smough_SpriteSheet_Turn.png", 16, 24, 4, 1},
   {SPRITE_ID::Medusa_Idle_Left,"assets/sprites/Smough_SpriteSheet_Left.png", 16, 24, 2, 1, 2},
@@ -86,6 +87,8 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
     return {current_frame, spritesheet};
   }
 
+  
+
 
   switch (entity->id) {
   case ENTITY_ID::MEDUSA:{
@@ -120,6 +123,33 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
 	  return GetSprite(SPRITE_ID::Metal_Box, spritebuffer);
   case ENTITY_ID::CART:
       return GetSprite(SPRITE_ID::Cart, spritebuffer);
+  case ENTITY_ID::FORKLIFT: {
+      Sprite* sprite = nullptr;
+      int frame = 0;
+      switch (entity->facing_current) {
+      case Direction::RIGHT:
+          sprite = GetSprite(SPRITE_ID::Forklift_Left, spritebuffer);
+          frame = (int)((*ticks_total * sprite->framerate) / FPS % GetSpriteCount(sprite));
+          return { frame, sprite, true };
+      case Direction::LEFT:
+          sprite = GetSprite(SPRITE_ID::Forklift_Left, spritebuffer);
+          frame = (int)((*ticks_total * sprite->framerate) / FPS % GetSpriteCount(sprite));
+          return { frame, sprite };
+      case Direction::DOWN:
+          sprite = GetSprite(SPRITE_ID::Forklift_Back, spritebuffer);
+          frame = (int)((*ticks_total * sprite->framerate) / FPS % GetSpriteCount(sprite));
+          return { frame, sprite };
+      case Direction::UP:
+          sprite = GetSprite(SPRITE_ID::Forklift_Front, spritebuffer);
+          frame = (int)((*ticks_total * sprite->framerate) / FPS % GetSpriteCount(sprite));
+          return { frame, sprite };
+      }
+  }
+  case ENTITY_ID::FIRE: {
+      Sprite* sprite = GetSprite(SPRITE_ID::Fire, spritebuffer);
+      int frame = (int)((*ticks_total * sprite->framerate) / FPS % GetSpriteCount(sprite));
+      return {frame, sprite};
+  }
   default:
     return GetSprite(SPRITE_ID::Fallback, spritebuffer);
   }  
@@ -156,6 +186,12 @@ Sprite* GetSpriteFromID(ENTITY_ID id, Sprite* spriteBuffer){
 case ENTITY_ID::CART:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Cart];
    break;
+case ENTITY_ID::FORKLIFT:
+   sprite_to_return = nullptr;
+   break;
+case ENTITY_ID::FIRE:
+	sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Fire];
+	break;
  /*
  case ENTITY_ID::SIREN:
    sprite_to_return = &spriteBuffer[(int)SPRITE_ID::Siren];

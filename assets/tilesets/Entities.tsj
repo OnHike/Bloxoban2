@@ -14,7 +14,7 @@
          "value":false
         }],
  "spacing":0,
- "tilecount":6,
+ "tilecount":8,
  "tiledversion":"1.12.2",
  "tileheight":32,
  "tiles":[
@@ -53,8 +53,20 @@
          "image":"..\/sprites\/Cart.png",
          "imageheight":32,
          "imagewidth":32
+        }, 
+        {
+         "id":6,
+         "image":"..\/sprites\/Forklift_Left.png",
+         "imageheight":32,
+         "imagewidth":64
+        }, 
+        {
+         "id":7,
+         "image":"..\/sprites\/Fire.png",
+         "imageheight":32,
+         "imagewidth":32
         }],
- "tilewidth":32,
+ "tilewidth":64,
  "type":"tileset",
  "version":"1.10"
 }

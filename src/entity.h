@@ -7,20 +7,22 @@ struct CommandBuffer;
 struct Gameplay;
 
 enum Behaviour : uint32_t {
-  NONE = 0,
-  CAN_MOVE = 1 << 0,
-  IS_PLAYER = 1 << 1,
-  RESPOND_TO_INPUT = 1 << 2,
-  //IS_PETRIFIED = 1 << 3,
-  CAN_ROTATE = 1 << 4,
-  UNPUSHABLE = 1 << 5,
-  JUMPS = 1 << 6,
-  IS_PUSHING = 1 << 7,
-  IS_PASSTHROUGH = 1 << 8,
-  CAN_MOVE_HORIZONTAL = 1 << 9,
-  CAN_MOVE_VERTICAL = 1 << 10,
-  HEAVY = 1 << 11,
-  STRONG = 1 << 12
+	NONE = 0,
+	CAN_MOVE = 1 << 0,
+	IS_PLAYER = 1 << 1,
+	RESPOND_TO_INPUT = 1 << 2,
+	//IS_PETRIFIED = 1 << 3,
+	CAN_ROTATE = 1 << 4,
+	UNPUSHABLE = 1 << 5,
+	JUMPS = 1 << 6,
+	IS_PUSHING = 1 << 7,
+	IS_PASSTHROUGH = 1 << 8,
+	CAN_MOVE_HORIZONTAL = 1 << 9,
+	CAN_MOVE_VERTICAL = 1 << 10,
+	HEAVY = 1 << 11,
+	STRONG = 1 << 12,
+	FIRE_HAZARD = 1 << 13,
+	FLAMMABLE = 1 << 14,
 };
 
 enum class Actions {
@@ -51,6 +53,8 @@ enum class ENTITY_ID : uint8_t {
 	METAL_BOX = 3,
 	CIGARETTE = 4,
 	CART = 5,
+	FORKLIFT = 6,
+	FIRE = 7,
 
   //SIREN = 3,
   //GOLEM = 4,

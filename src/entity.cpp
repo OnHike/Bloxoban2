@@ -52,7 +52,7 @@ switch (entity->id) {
     entity->strength = 0;
     break;  */
   case ENTITY_ID::ROCK:
-    SetBehaviour(entity, (Behaviour)CAN_MOVE);
+    SetBehaviour(entity, (Behaviour)(CAN_MOVE | FLAMMABLE));
     break;
   case ENTITY_ID::METAL_BOX:
 	  SetBehaviour(entity, (Behaviour)(CAN_MOVE | HEAVY));
@@ -62,6 +62,14 @@ switch (entity->id) {
 	  break;
   case ENTITY_ID::CART:
       SetBehaviour(entity, (Behaviour)(CAN_MOVE | CAN_MOVE_HORIZONTAL));
+      break;
+  case ENTITY_ID::FORKLIFT:
+      SetBehaviour(entity, (Behaviour)(CAN_MOVE | STRONG | FLAMMABLE));
+      break;
+        case ENTITY_ID::FIRE: {
+      SetBehaviour(entity, (Behaviour)(FIRE_HAZARD));
+      break;
+  }
   }
 
 }

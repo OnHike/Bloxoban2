@@ -29,7 +29,7 @@ extern "C" {
     assert(gameplay->initialized == false);
     gameplay->currentLevelIndex = 0;
     gameplay->pending_next_level = false;
-    CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_04.tmj");
+    CreateLevel(arena_levels, &gameplay->levels[2], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_04.tmj");
     CreateLevel(arena_levels, &gameplay->levels[1], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_03.tmj");
     CreateLevel(arena_levels, &gameplay->levels[0], &tilesetBuffer[(int)TILESETS::Dungeon], "assets/levels/level_00.tmj");
     
@@ -382,6 +382,8 @@ extern "C" {
       return false;
     }
 
+	
+
 	if (HasBehaviour(mover, STRONG)) {
 		strength = 1000;
 	}
@@ -400,6 +402,7 @@ extern "C" {
 	if (HasBehaviour(mover, CAN_MOVE_VERTICAL) && xDir != 0 && yDir == 0) {
 		return false;
 	}
+
     if(stepInto_entity == nullptr || HasBehaviour(stepInto_entity, IS_PASSTHROUGH)){
       if(IsWalkable(test_x, test_y, level)){
         MoveCommand mv(mover, xDir, yDir);
@@ -432,10 +435,20 @@ extern "C" {
                 }
                 
 			}
+
+            if (HasBehaviour(mover, FLAMMABLE) && HasBehaviour(stepInto_entity, FIRE_HAZARD)) {
+				//if mover is flammable and stepInto_entity is fire hazard, then mover is removed from the level
+				AnyCommand type = CMD_TYPE::REMOVE;
+                Push(cmd_buffer, type, level);
+                return true;
+            }
+            
             if (TryMove(stepInto_entity, level, cmd_buffer, xDir, yDir, --strength, strongPush || fromStrongPush || HasBehaviour(mover, STRONG) == true)) {
                 MoveCommand mv(mover, xDir, yDir);
                 AddBehaviour(mover, Behaviour::IS_PUSHING);
                 Push(cmd_buffer, mv, level);
+
+
                 return true;
             }
         }
