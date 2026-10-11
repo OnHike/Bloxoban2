@@ -117,6 +117,8 @@ SpriteRenderInfo GetSprite_FromEntityState(Entity* entity, Sprite* spritebuffer,
 	  return GetSprite(SPRITE_ID::Cigarette, spritebuffer);
   case ENTITY_ID::METAL_BOX:
 	  return GetSprite(SPRITE_ID::Metal_Box, spritebuffer);
+  case ENTITY_ID::FORKLIFT:
+      return GetSprite(SPRITE_ID::Forklift_Right, spritebuffer);
   default:
     return GetSprite(SPRITE_ID::Fallback, spritebuffer);
   }  

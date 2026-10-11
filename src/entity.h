@@ -45,11 +45,13 @@ inline Direction DirectionFromXY(int xDir, int yDir){
 }
 
 enum class ENTITY_ID : uint8_t {
-  MEDUSA = 0,
-  DEMON = 1,
-  ROCK = 2,
-  METAL_BOX = 3,
-  CIGARETTE = 4,
+	MEDUSA = 0,
+	DEMON = 1,
+	ROCK = 2,
+	METAL_BOX = 3,
+	CIGARETTE = 4,
+	FORKLIFT = 5,
+
   //SIREN = 3,
   //GOLEM = 4,
 };
